@@ -91,7 +91,7 @@ If you see the following message when expanding a stack trace, it should be due 
 
 ![Request Not Finished](request-not-finished.jpg)
 
-The default profiling session duration time is 60 seconds. You can add an Application Setting named ``APPSETTING_IIS_PROFILING_TIMEOUT_IN_SECONDS`` to change it.
+>Note: The default profiling session duration time is 60 seconds. You can add an Application Setting named ``APPSETTING_IIS_PROFILING_TIMEOUT_IN_SECONDS`` to change it.
 
 ### Decompile the code of ReproController.DoJob() from LabHighCpuCoreSite.dll
 
