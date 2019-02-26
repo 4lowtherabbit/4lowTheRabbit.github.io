@@ -35,3 +35,5 @@ Using the above commands to
 You can verify the solution either by
 * Running !Threads 
 * Or running !clrstack on a .NET Core thread.
+
+This solution can be applied to Function App V2 too, which hosts .NET Core in w3wp.exe too.
