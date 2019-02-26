@@ -112,7 +112,7 @@ Download and unzip ILSpy tool from its [Download Page](https://github.com/icshar
 We cannot hold and debug an issue online for root cause for hours in a production environment. Dump files are captured as snapshots of a process, which can be debugged offline later by WinDBG. 
 
 >Note: Since version 2.2, .NET Core web applications are hosted in w3wp.exe [in-process](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/index?view=aspnetcore-2.2&tabs=windows#in-process-hosting-model), instead of [out-of-processs](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/index?view=aspnetcore-2.2&tabs=windows#out-of-process-hosting-model) in dotnet.exe previously. If you are not able to debug .NET Core in this scenario, this will be due to WinDBG doesn't load the right debugger extension for .NET core. The steps in 
-[Debug .NET Core In-Process Dumps](https://4lowtherabbit.github.io/blogs/2019/02/DebugDotNetCoreInProcess) can help. 
+[Debug .NET Core In-Process Dumps](https://4lowtherabbit.github.io/blogs/2019/02/DebuggingInProcess) can help. 
 
 ### Collect the dump file
 In the **"Diagnose and solve problems" (DaaS)** blade of the site on the Azure portal, click **"Memory Dump"** in the **"Diagnostic Tools"** tile.
