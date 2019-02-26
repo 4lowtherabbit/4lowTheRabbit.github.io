@@ -9,3 +9,5 @@
 * [Workshop - High CPU Site](https://4lowTheRabbit.github.io/blogs/2019/02/HighCpuCoreSite)
 
 * [Workshop - Java Web App slow boot up](https://4lowTheRabbit.github.io/blogs/2019/02/JavaSlowStartup)
+
+* [Debug .NET Core In-Process Dumps](https://4lowTheRabbit.github.io/blogs/2019/02/DebugDotNetCoreInProcess)
