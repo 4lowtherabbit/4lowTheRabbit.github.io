@@ -1,17 +1,12 @@
 # How to trace for ASP.NET App Domain shutdown reasons
 
-Scott has a [blog post](https://weblogs.asp.net/scottgu/433194) on this topic about 14 years ago. It was based on invoking some functions via refectoring.
+Scott has written a [blog post](https://weblogs.asp.net/scottgu/433194) on this topic about 14 years ago. It was based on invoking some functions via refectoring.
 
 The latest .NET API allows to get the shutdown reason information more directly via the following code in Global.asax
 ```C#
         protected void Application_End()
         {
             var reason = HostingEnvironment.ShutdownReason;
-
-            if (!EventLog.SourceExists(".NET Runtime"))
-            {
-                EventLog.CreateEventSource(".NET Runtime", "Application");
-            }
 
             EventLog log = new EventLog();
             log.Source = ".NET Runtime";
@@ -40,3 +35,6 @@ After I append an empty line into web.config and save the file, the ASP.NET appl
         </EventData>
     </Event>
 ```
+
+## Sample project
+I have published a [sample project](https://github.com/4lowtherabbit/LabAppDomainShutdown)
