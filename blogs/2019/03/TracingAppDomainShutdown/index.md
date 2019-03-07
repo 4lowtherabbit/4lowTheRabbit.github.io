@@ -1,4 +1,4 @@
-# How to trace for ASP.NET App Domain shutdown reasons
+# How to trace for ASP.NET App Domain shutdown for reasons
 
 Scott has written a [blog post](https://weblogs.asp.net/scottgu/433194) on this topic about 14 years ago. It was based on invoking some functions via refectoring.
 
