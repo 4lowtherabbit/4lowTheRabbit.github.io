@@ -36,5 +36,8 @@ After I append an empty line into web.config and save the file, the ASP.NET appl
     </Event>
 ```
 
+Also, I can search ``Application Events`` in the ``Diagnose and solve problems`` blade of the site and see the following event:
+![Events](events.jpg)
+
 ## Sample project
 I have published a [sample project](https://github.com/4lowtherabbit/LabAppDomainShutdown)
