@@ -11,3 +11,5 @@
 * [Workshop - Java Web App slow boot up](https://4lowTheRabbit.github.io/blogs/2019/02/JavaSlowStartup)
 
 * [Debug .NET Core In-Process Dumps](https://4lowTheRabbit.github.io/blogs/2019/02/DebuggingInProcess)
+
+* [How to trace for ASP.NET App Domain shutdown reasons](https://4lowTheRabbit.github.io/blogs/2019/03/TracingAppDomainShutdown)
