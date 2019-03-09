@@ -231,6 +231,6 @@ In order to repro the high memory issue in this lab site, we can take the follow
 Delete the resource group of this workshop to delete the resource items and save the cost.
 
 ## Useful links:
-* https://bennettadelson.wordpress.com/2013/04/11/using-perfview-to-diagnose-a-net-memory-leak-2/
-* https://docs.microsoft.com/en-us/visualstudio/misc/analyze-dotnet-framework-memory-issues?view=vs-2015#BKMK_Analyze_memory_use
-* https://blogs.msdn.microsoft.com/tess/2008/03/17/net-debugging-demos-lab-6_memory-leak/
+* [Using PerfView to Diagnose a .NET Memory Leak](https://bennettadelson.wordpress.com/2013/04/11/using-perfview-to-diagnose-a-net-memory-leak-2/)
+* [Analyze .NET Framework memory issues by Visual Studio](https://docs.microsoft.com/en-us/visualstudio/misc/analyze-dotnet-framework-memory-issues?view=vs-2015#BKMK_Analyze_memory_use)
+* [Tess's memory leak lab](https://blogs.msdn.microsoft.com/tess/2008/03/17/net-debugging-demos-lab-6_memory-leak/)
