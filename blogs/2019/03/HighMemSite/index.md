@@ -16,7 +16,12 @@ After the deployment is done, a resource group will be created with the followin
 ![Resources](resources.jpg)
 
 ### The code which "leaks" memory
-This lab is based on the following code, which has a OutputCache configured to cache the responses of the ``Cached`` action for 3 days. Another action ``Index`` sends requests to ``Cached``, with a different ``id`` parameter value in each request. Due to OutputCache is configured to vary by parameter ``id``, the requests from ``Index`` to ``Cached`` result in an expanding of memory used to cache the responses from ``Cached``. These memory is hold up by the cache, contributes to the Committed Bytes metric of the process, for 3 days. There are real-world web applications who "leak" memory due to unsophisticated cache algorithm and configurations.
+This lab is based on the following code, which has a OutputCache configured to cache the responses of the ``Cached`` action for 3 days. Another action ``Index`` sends requests to ``Cached``, with a different ``id`` parameter value in each request. Due to OutputCache is configured to vary by parameter ``id``, every request from ``Index`` to ``Cached`` adds one more cached response item in the output cache. 
+
+These memory is hold up by the cache for 3 days, which contributes to the Committed Bytes metric of the process.
+
+There are real-world web applications who "leak" memory due to unsophisticated cache algorithm and configurations.
+
 ```C#
 public class ReproController : Controller
 {
@@ -44,37 +49,41 @@ public class ReproController : Controller
     }
 }
 ```
+
 ### Repro the high memory issue
-In order to repro the high memory issue in the site, we can take the following steps
+In order to repro the high memory issue in this lab site, we can take the following steps:
 
 1. Launch a Linux Bash shell
 
     I use Ubuntu via the Windows Subsystem of Linux.
-2. Run the following command to install `ab` utilility
+
+2. Run the following commands to install the `ab` utilility
+
     ```
     sudo apt update
     sudo apt install apache2-utils
     ```
+
 3. Use `ab` to send 100000 requests to the site.
     
-    Replace the site name in the following URL with yours.
+    Replace the site name below with yours.
     ```
     ab -n 100000 -c 5 -s 300 -k http://labmemoryleaksite33c9.azurewebsites.net/repro
     ```
 
-Under ``Memory Analysis`` of the ``Diagnose and solve problems`` blade of the site, observe ``Physical Memory Usage`` of the site climbs up.
-![Physical Memory Usage climbs up](PhysicalMemory.jpg)
-So does the ``Committed Memory Usage`` metric of the instance.
-![Committed Mmeory Usage](CommittedMemory.jpg)
+4. Under ``Memory Analysis`` of ``Diagnose and solve problems``, observe the ``Physical Memory Usage`` metric of the site climbs up, when requests are sent to the site by ``ab``.
+
+    ![Physical Memory Usage climbs up](PhysicalMemory.jpg)
+    So does the ``Committed Memory Usage`` metric of the instance.
+    ![Committed Mmeory Usage](CommittedMemory.jpg)
 
 
 ## Troubleshoot the high memory issue
-In real cases, we can find out the causes of high memory issues through the following steps.
 
 ### Collect a dump file when process memory is high
-1. On the Azure portal, in the ``Diagnose and solve problems`` blade of the site, click **"Memory Dump"** in the ``Diagnostic Tools`` tile.
+1. On the Azure portal, in the ``Diagnose and solve problems`` blade of the site, click ``Memory Dump`` in the ``Diagnostic Tools`` tile.
 
-2. Check ``ASP.NET`` as the application stack and then click the ``Collect Memory Dump`` button.
+2. Select ``ASP.NET`` as the application stack and then click the ``Collect Memory Dump`` button.
 
 3. Select ``Collect Data Only`` and then click ``Collect Memory Dump`` **when memory is high**.
 
@@ -84,12 +93,13 @@ In real cases, we can find out the causes of high memory issues through the foll
 
     ![Download the Dotnet.exe Dump](download-the-dump.jpg)
 
-### Use Visual Studio 2019 to do memory usage analysis
-1. Drag and drop the .dmp dump file to Visual Studio.
+### Use Visual Studio to do memory usage analysis
+1. Drag & drop the dump file to Visual Studio 2019.
 2. Click the ``Debug Managed Memory`` Action
 
     ![Debug in VS](vs-debug.jpg)
-2. In the usage report, we can see that ASP.NET Cache is responsible for most of the memory objects.
+
+3. In the usage report, we can see that ASP.NET Cache is responsible for most of the memory objects.
 
     ![VS report](vs-report.jpg)
 
@@ -97,21 +107,25 @@ In real cases, we can find out the causes of high memory issues through the foll
 1. Download and install PerfView from its [Download Page](https://github.com/Microsoft/perfview/blob/master/documentation/Downloading.md).
 
 2. From PerfView's memu, select ``memory`` -> ``Take Heap Snapshot From Dump``.
+
     ![open dump by PerfView](open-dump-by-perfview.jpg)
 
 3. Enter path of the dump and the output files and then click the "Dump GC Heap" button.
 
     ![Dump GC Heap](dump-gc-heap.jpg)
 
-8. The report shows the ASP.NET cache is responsible for most of the memory usage.
+4. The report shows that the ASP.NET cache is responsible for most of the memory usage.
     
     ![PerfView Report](perfview-report.jpg)
 
 ### Use WinDBG to do memory usage analysis
 1. Search WinDBG in windows 10's Microsoft store app
+
     ![search WinDBG](search-windbg.jpg)
+
 2. Install and launch the WinDbg app
 3. Open the .dmp dump file by WinDbg
+
     ![open dump](open-dump.png)
 
     >Note: This is a 32bit process, since the debugger shows `Free X86 compatible` when loading the dump
@@ -128,11 +142,15 @@ In real cases, we can find out the causes of high memory issues through the foll
     Please be patient for WindBG to load all symbol files. It will take a few minutes for the first time when debugging a dump.
 
     ![loading symobol](loading-symbol.png)
+
 4. Load the 32bit version of debugger extension for .NET Framework, by running the folllowing command.
+
     ```
     .load C:\Windows\Microsoft.NET\Framework\v4.0.30319\sos.dll
     ```
+
 5. Run ``!DumpHeap -stat`` to dump out memory usage grouped by type names.
+    
     We can see that ``System.String`` takes most of the memory.
     ```
     ...
@@ -154,10 +172,13 @@ In real cases, we can find out the causes of high memory issues through the foll
         Addr     Size      Followed by
     15282118    1.3MB         153cc8d0 System.Byte[]
     ```
-6. Dump out the string objects by using the Method Table (mt) value in the first column of the System.String row above.
+
+6. Dump out the string objects by using its Method Table (MT) value. (MT values of types can be found in the first column of the above command's output.)
+
     ```
     !dumpheap -mt 7205eb40
     ```
+
     >Note: It takes time to dump out all of the string objects in a big dump file. Press CTRL+BREAK to stop, if you want.
 
     >Note: Use ``.logopen`` to let the debugger write its output to a disk file and then ``.logclose`` to close it.
@@ -204,7 +225,7 @@ In real cases, we can find out the causes of high memory issues through the foll
     Found 1 unique roots (run '!GCRoot -all' to see all roots).
 
     ```
-    Here is my debugger's [output](dbg.txt) for download.
+    Here is my debugger's [output](dbg.txt), for download.
 
 ## Clean up
 Delete the resource group of this workshop to delete the resource items and save the cost.
