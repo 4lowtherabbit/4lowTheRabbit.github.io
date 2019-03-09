@@ -1,6 +1,4 @@
 # Workshop - High CPU Site
->Note: This workshop applies to not only .NET Core, but also .NET Framework websites, except that .NET Framework is hosted in-process in the w3wp.exe process.
-
 ## Environment setup
 
 First of all, click the [Deploy to Azure](https://github.com/4lowTheRabbit/LabHighCpuCoreSite) button on the README page of [this workshop's GitHub repository](https://github.com/4lowTheRabbit/LabHighCpuCoreSite).
