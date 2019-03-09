@@ -181,7 +181,7 @@ In order to repro the high memory issue in this lab site, we can take the follow
 
     >Note: It takes time to dump out all of the string objects in a big dump file. Press CTRL+BREAK to stop, if you want.
 
-    >Note: Use ``.logopen`` to let the debugger write its output to a disk file and then ``.logclose`` to close it.
+    >Note: We can use ``.logopen`` to let the debugger write its output to a disk file and then ``.logclose`` to close it.
 7. In order to observe how the ``String`` objects are referenced, randomly pick up their memory addresses and run ``!gcroot %address%``.
     
     For instance, the following reference chain shows the string object is referenced by the ASP.NET Cache.
