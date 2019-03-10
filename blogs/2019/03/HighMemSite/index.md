@@ -16,7 +16,7 @@ After the deployment is done, a resource group will be created with the followin
 ![Resources](resources.jpg)
 
 ### The code which "leaks" memory
-This lab is based on the following code, which has a OutputCache configured to cache the responses of the ``Cached`` action for 3 days. Another action ``Index`` sends requests to ``Cached``, with a different ``id`` parameter value in each request. Due to OutputCache is configured to vary by parameter ``id``, every request from ``Index`` to ``Cached`` adds one more cached response item in the output cache. 
+This lab is based on the following code, which has an OutputCache configured to cache the responses of the ``Cached`` action for 3 days. Another action ``Index`` sends requests to ``Cached``, with a different ``id`` parameter value in each request. Due to OutputCache is configured to vary by parameter ``id``, every request from ``Index`` to ``Cached`` adds one more cached response item in the output cache. 
 
 These memory is hold up by the cache for 3 days, which contributes to the Committed Bytes metric of the process.
 
