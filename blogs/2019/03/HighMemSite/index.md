@@ -57,7 +57,7 @@ In order to repro the high memory issue in this lab site, we can take the follow
 
     I use Ubuntu via the Windows Subsystem of Linux.
 
-2. Run the following commands to install the `ab` utilility
+2. Run the following commands to install the `ab` utility
 
     ```
     sudo apt update
@@ -91,7 +91,7 @@ In order to repro the high memory issue in this lab site, we can take the follow
 
 4. It can take a few minutes for the diagnostic tool to write the big memory dump file. After that, click the download link to download the .dmp dump file.
 
-    ![Download the Dotnet.exe Dump](download-the-dump.jpg)
+    ![Download the w3wp.exe Dump](download-the-dump.jpg)
 
 ### Use Visual Studio to do memory usage analysis
 1. Drag & drop the dump file to Visual Studio 2019.
@@ -184,9 +184,9 @@ In order to repro the high memory issue in this lab site, we can take the follow
     >Note: We can use ``.logopen`` to let the debugger write its output to a disk file and then ``.logclose`` to close it.
     >
     >```
-    >.logopen D:\dbg.txt
+    >0:000>.logopen D:\dbg.txt
     >Opened log file 'D:\dbg.txt'
-    >!dumpheap -mt 7205eb40
+    >0:000>!dumpheap -mt 7205eb40
     >
     >...
     >
