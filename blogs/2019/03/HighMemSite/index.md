@@ -143,7 +143,7 @@ In order to repro the high memory issue in this lab site, we can take the follow
 
     ![loading symobol](loading-symbol.png)
 
-4. Load the 32bit version of debugger extension for .NET Framework, by running the folllowing command.
+4. Load the 32bit version of debugger extension for .NET Framework, by running the following command.
 
     ```
     .load C:\Windows\Microsoft.NET\Framework\v4.0.30319\sos.dll
@@ -173,7 +173,7 @@ In order to repro the high memory issue in this lab site, we can take the follow
     15282118    1.3MB         153cc8d0 System.Byte[]
     ```
 
-6. Dump out the string objects by using its Method Table (MT) value. (MT values of types can be found in the first column of the above command's output.)
+6. Dump out the string objects by using their Method Table (MT) values. (MT values of types can be found in the first column of the above command's output.)
 
     ```
     !dumpheap -mt 7205eb40
