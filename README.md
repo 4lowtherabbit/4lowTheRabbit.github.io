@@ -5,6 +5,8 @@
 
 * [Workshop - High Memory Site](https://4lowTheRabbit.github.io/blogs/2019/03/HighMemSite)
 
+* [Test Application Initialization in Azure App Services](https://4lowTheRabbit.github.io/blogs/2019/03/AppInitInAppServices)
+
 ## Feb 2019
 
 * [Workshop - High CPU Site](https://4lowTheRabbit.github.io/blogs/2019/02/HighCpuCoreSite)
