@@ -5,7 +5,7 @@ We can use Application Initialization to warmup an worker instance in Azure App 
 # Setup
 I deployed a .Net framework MVC application with a WarmupController class below:
 
-```C#
+```c#
 public class WarmupController : Controller
 {
     // GET: Warmup
@@ -18,7 +18,7 @@ public class WarmupController : Controller
 ```
  
 And the web.config file:
-```XML
+```xml
 <applicationInitialization>
     <add initializationPage="/warmup/" />
 </applicationInitialization>
