@@ -37,7 +37,11 @@ And the web.config file:
     </traceFailedRequests>
 </tracing>
  ```
- 
+I turn on the ``Failed Request Trace`` and ``Web Server Log`` for the site.
+![Turn on the logs](turn-on-logs.jpg)
+
+The log files can be found in the D:\home\LogFiles\ folder of the site, when I log on to the Kudu site.
+
 I use ``ab`` to trigger site requests load:
 ```
 ab -n 1000000 -c 2 http://juzhuwarmup.azurewebsites.net/home/about
