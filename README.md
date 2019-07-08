@@ -1,5 +1,8 @@
 # 4lowTheRabbit.github.io
 
+## July 2019
+* [Workshop - Crash](https://4lowTheRabbit.github.io/blogs/2019/07/Crash)
+
 ## March 2019
 * [How to trace for ASP.NET App Domain shutdown for reasons](https://4lowTheRabbit.github.io/blogs/2019/03/TracingAppDomainShutdown)
 
