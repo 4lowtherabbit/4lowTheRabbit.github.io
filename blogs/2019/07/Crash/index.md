@@ -65,6 +65,8 @@ The web application's w3wp.exe will crash, if you browse `/Repro/Crash` of the s
 
     Or you can open it directly at https://appname.scm.azurewebsites.net/crashdiag/
 5. Select `2nd Chance Unhandled Exception` and click `Start`
+
+    Tip: You need to change Process Name from default w3wp.exe to the one to be monitored, like dotnet.exe, etc.
 6. Wait for the state to change from `Wait for Starting Monitoring` to `Monitoring 1 Process on RD501AC5042FB1` like
 7. Open file `D:\home\site\wwwroot\App_Data\Jobs\Continuous\CrashHelper\crashHelper.settings`, Change the last line from
     ```
