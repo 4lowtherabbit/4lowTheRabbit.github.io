@@ -12,7 +12,6 @@ Let's take TCP protocol for instance, SNAT works in the following steps:
 
 2.	The TCP package is routed from a worker instance to the SNAT load balancer. SNAT changes the source IP and port of the TCP package into its own ones and sends it out to the Internet.
 
-
       It also keeps a record of the following mapping:
 
       |Protocol|Worker instance IP address:port|Load balancer IP address:port|External endpoint IP address:port|
@@ -22,7 +21,6 @@ Let's take TCP protocol for instance, SNAT works in the following steps:
 3.	The Internet server receives the TCP package. Later when it sends back any package, it uses the IP address and port of the load balancer, as the destination of the package.
 
 4.	When the load balancer receives a package routed back from the Internet server, it changes the destination IP and port to the ones of the worker instance, by using the mapping record above. The package then can be routed back to the worker instance.
-
 
 The above process is transparent to the worker instance and the Internet server. The load balancer does all the address translation job for them.
 
@@ -35,7 +33,7 @@ According to [https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer
 > * One SNAT port is consumed per flow to a single destination IP address, port. For multiple TCP flows to the same destination IP address, port, and protocol, each TCP flow consumes a single SNAT port. This ensures that the flows are unique when they originate from the same public IP address and go to the same destination IP address, port, and protocol.
 > * Multiple flows, each to a different destination IP address, port, and protocol, share a single SNAT port. The destination IP address, port, and protocol make flows unique without the need for additional source ports to distinguish flows in the public IP address space.
 
-Every IP address is limited to open 65536 ports at the most. A typical App Service stamp has 5 outbound IP addresses for its SNAT load balancer. Comparing with the thousands of instances that a stamp can contain, the SNAT ports are limited.
+Every IP address is limited to open 65536 ports at the most. A typical App Service stamp has 5 outbound IP addresses for its SNAT load balancer. These ports are shared by all instances inside a stamp. A typical App Service stamp has thousands of instances. **The SNAT ports is a limited resource of a stamp**.
 
 Things can get worse if applications open and close connections frequently. According to: [https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release](docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release)
 
@@ -45,6 +43,7 @@ Things can get worse if applications open and close connections frequently. Acco
 > * If idle timeout has been reached, port is released.
 
 That means if a web application opens a HTTP connection to call its backend Restful web service once every second and well closes the connection after each call, it will occupy 240 SNAT ports in 240 second. The following code snipper can reproduce this issue:
+
 ```C#
 public string Index(string url)
 {
