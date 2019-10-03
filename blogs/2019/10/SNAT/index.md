@@ -116,12 +116,12 @@ If you do need it, you can still open a support ticket and the support engineer 
 2. A SNAT port can be share by different flows, if they are different in either protocol, IP address or port. The TCP Connections metric counts on every TCP connection.
 3. The TCP Connections limit happens at worker instance’s sandbox level. The load balancer doesn’t use the TCP Connections metric for SNAT port limiting.
 
-**Q** I have mutiple WebJobs hosted by a single site. They run together and share each worker instances of the site's App Service Plan. They also need to connect to the same external endpoint, which is Azure SQL database. Now they have an SNAT port exhaustion issue, since the WebJobs are complaining not able to connect to the database. How do I know which WebJob opens the most database connections and causes the issue?
+**Q**: I have multiple WebJobs hosted by a single site. They run together and share each worker instances of the site's App Service Plan. They also need to connect to the same external endpoint, which is Azure SQL database. Now they have an SNAT port exhaustion issue, since the WebJobs are complaining not able to connect to the database. How do I know which WebJob opens the most database connections and causes the issue?
 
-**A** We don't have a metric to show us how many connections is opened by each process. In order to narrow it down, please move some WebJobs out to another App Service plan to see things get better? Or if the issue remains in one of the plans. You can iterate, until spotting out the culprit.
+**A**: We don't have a metric to show us how many connections is opened by each process. In order to narrow it down, please move some WebJobs out to another App Service plan to see things get better? Or if the issue remains in one of the plans. You can iterate, until spotting out the culprit.
 
 ## Lab
-The following code snipper can reproduce the SNAT port exaustion issue:
+The following code snipper can reproduce the SNAT port exhaustion issue:
 ```C#
 public string Index(string url)
 {
