@@ -29,7 +29,7 @@ The above process is transparent to the worker instance and the Internet server.
 ## SNAT ports exhaustion
 SNAT load balancer is a shared resource between all of App Service sites in the same stamp. Including the web applications, WebJobs, Functions, telemetry services (Application Insights), etc. All services inside a stamp need the load balancer to establish their network flows to external endpoints.
 
-According to https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp
+According to [https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp)
 
 > TCP SNAT Ports
 > * One SNAT port is consumed per flow to a single destination IP address, port. For multiple TCP flows to the same destination IP address, port, and protocol, each TCP flow consumes a single SNAT port. This ensures that the flows are unique when they originate from the same public IP address and go to the same destination IP address, port, and protocol.
@@ -37,7 +37,7 @@ According to https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-
 
 Every IP address is limited to open 65536 ports at the most. A typical App Service stamp has 5 outbound IP addresses for its SNAT load balancer. Comparing with the thousands of instances that a stamp can contain, the SNAT ports are limited.
 
-Things can get worse if applications open and close connections frequently. According to: https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release  
+Things can get worse if applications open and close connections frequently. According to: [https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release](docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release)
 
 > TCP SNAT port release
 > * If either server/client sends FINACK, SNAT port will be released after 240 seconds.
@@ -84,7 +84,7 @@ Actually, there are 2 algorithms available in Azure load balancer for SNAT port 
 
   128 ports per instance fixed and pre-allocated.
 
-How each algorithm works is described in https://azure.microsoft.com/en-us/blog/azure-load-balancer-to-become-more-efficient/
+How each algorithm works is described in [https://azure.microsoft.com/en-us/blog/azure-load-balancer-to-become-more-efficient/](https://azure.microsoft.com/en-us/blog/azure-load-balancer-to-become-more-efficient/)
 
 Most App Service stamps are currently using the on-demand algorithm and would potentially migrate to the new algorithm in the future. So, speaking of a total SNAT ports value that a worker instance is guaranteed to have, it should be 128.
 
@@ -107,7 +107,7 @@ If Application Insight dependency tracking is enabled to the web application, we
 
 ## How to solve a SNAT exhausting issue for App Service
 
-The general guidance in https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#problemsolving can be applied to App Service web applications, including:
+The general guidance in [https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#problemsolving](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#problemsolving) can be applied to App Service web applications, including:
 * Modify the application to reuse connections
 * Modify the application to use connection pooling
 * Modify the application to use less aggressive retry logic
