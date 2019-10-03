@@ -39,7 +39,7 @@ According to [The **TCP** section of **Outbound connections in Azure**](https://
 
 Every IP address is limited to open 65536 ports at the most. A typical App Service stamp has 5 outbound IP addresses for its SNAT load balancer. These ports are shared by all instances inside a stamp. A typical App Service stamp has thousands of instances. **The SNAT ports is a limited resource of a stamp**.
 
-Things can get worse if applications open and close connections frequently. According to: [https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release](docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release)
+Things can get worse if applications open and close connections frequently. According to: [The **TCP SNAT port release** section of **Outbound connections in Azure**](docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release)
 
 > TCP SNAT port release
 > * If either server/client sends FINACK, SNAT port will be released after 240 seconds.
