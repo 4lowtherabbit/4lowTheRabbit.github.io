@@ -42,31 +42,7 @@ Things can get worse if applications open and close connections frequently. Acco
 > * If a RST is seen, SNAT port will be released after 15 seconds.
 > * If idle timeout has been reached, port is released.
 
-That means if a web application opens a HTTP connection to call its backend Restful web service once every second and well closes the connection after each call, it will occupy 240 SNAT ports in 240 second. The following code snipper can reproduce this issue:
-
-```C#
-public string Index(string url)
-{
-    var request = HttpWebRequest.Create(url);
-    request.GetResponse();
-
-    return "OK";
-}
-```
-
-As well as this one:
-
-```C#
-public async Task<string> Client(string url)
-{
-    using (var client = new HttpClient())
-    {
-        await client.GetAsync(url);
-    }
-
-    return "OK";
-}
-```
+That means if a web application opens a HTTP connection to call its backend Restful web service once every second and well closes the connection after each call, it will occupy 240 SNAT ports in 240 second.
 
 That also means a busy website whose SQL database connection pool size is 300, will occupy 300 SNAT ports, when its SQL queries execute slowly in the database.
 
@@ -140,3 +116,63 @@ If you do need it, you can still open a support ticket and the support engineer 
 2. A SNAT port can be share by different flows, if they are different in either protocol, IP address or port. The TCP Connections metric counts on every TCP connection.
 3. The TCP Connections limit happens at worker instance’s sandbox level. The load balancer doesn’t use the TCP Connections metric for SNAT port limiting.
 
+**Q** I have mutiple WebJobs hosted by a single site. They run together and share each worker instances of the site's App Service Plan. They also need to connect to the same external endpoint, which is Azure SQL database. Now they have an SNAT port exhaustion issue, since the WebJobs are complaining not able to connect to the database. How do I know which WebJob opens the most database connections and causes the issue?
+
+**A** We don't have a metric to show us how many connections is opened by each process. In order to narrow it down, please move some WebJobs out to another App Service plan to see things get better? Or if the issue remains in one of the plans. You can iterate, until spotting out the culprit.
+
+## Lab
+The following code snipper can reproduce the SNAT port exaustion issue:
+```C#
+public string Index(string url)
+{
+    var request = HttpWebRequest.Create(url);
+    request.GetResponse();
+
+    return "OK";
+}
+```
+In order to reuse the connections, we can change it like below:
+```C#
+public string Fin(string url)
+{
+    var request = HttpWebRequest.Create(url);
+    var response = request.GetResponse();
+    response.Close();
+
+    return "OK";
+}
+```
+
+This one leaks SNAT ports too:
+```C#
+public async Task<string> Client(string url)
+{
+    using (var client = new HttpClient())
+    {
+        await client.GetAsync(url);
+    }
+
+    return "OK";
+}
+```
+Which can be rewritten into the following one, in order to reuse the connections of only one HttpClient:
+
+```C#
+private static Lazy<HttpClient> _client = new Lazy<HttpClient>();
+
+public async Task<string> ReuseClient(string url)
+{
+    var client = _client.Value;
+    await client.GetAsync(url);
+    return "OK";
+}
+```
+
+The code is published on GitHub.
+* [LabSNAT](https://github.com/4lowtherabbit/LabSNAT)
+* [LabDelay](https://github.com/4lowtherabbit/LabDelay)
+
+You can try it yourself by deploying the code to your site and running the following command in a Bash console:
+```Bash
+ab -r -n 100000 -c 500 -s 120 https://labsnatxxxx.azurewebsites.net/repro/?url=https://labdelayxxxx.azurewebsites.net/delay?seconds=50
+```
