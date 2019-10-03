@@ -69,7 +69,7 @@ public async Task<string> Client(string url)
 }
 ```
 
-That also means a busy website whose SQL database connection pool size 300, will occupy 300 SNAT ports, when its SQL queries execute slowly in the database.
+That also means a busy website whose SQL database connection pool size is 300, will occupy 300 SNAT ports, when its SQL queries execute slowly in the database.
 
 A third example, considering a function app that is triggered by queue messages and saves its results to storage blobs, if at the beginning of a load test, all test messages are dumped into the queue, the function app will exhaust SNAT ports very soon.
 
