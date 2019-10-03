@@ -78,9 +78,11 @@ In order to prevent sites from exhausting SNAT ports of a stamp and blocking oth
 
 Actually, there are 2 algorithms available in Azure load balancer for SNAT port allocation:
 * On-demand algorithm
-160 ports per instance as base, can be more on-demand. 
+
+  160 ports per instance as base, can be more on-demand. 
 * The new algorithm
-128 ports per instance fixed and pre-allocated.
+
+  128 ports per instance fixed and pre-allocated.
 
 How each algorithm works is described in https://azure.microsoft.com/en-us/blog/azure-load-balancer-to-become-more-efficient/
 
