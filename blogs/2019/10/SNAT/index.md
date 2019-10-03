@@ -13,11 +13,11 @@ Let's take TCP protocol for instance, SNAT works in the following steps:
 2.	The TCP package is routed from a worker instance to the SNAT load balancer. SNAT changes the source IP and port of the TCP package into its own ones and sends it out to the Internet.
 
 
->>It also keeps a record of the following mapping:
+      It also keeps a record of the following mapping:
 
->>|Protocol|Worker instance IP address:port|Load balancer IP address:port|External endpoint IP address:port|
->>|--------|-------------------------------|-----------------------------|---------------------------------|
->>|TCP     |10.0.5.60:51014                |13.76.245.72:12481           |52.189.232.180:80                |
+      |Protocol|Worker instance IP address:port|Load balancer IP address:port|External endpoint IP address:port|
+      |--------|-------------------------------|-----------------------------|---------------------------------|
+      |TCP     |10.0.5.60:51014                |13.76.245.72:12481           |52.189.232.180:80                |
 
 3.	The Internet server receives the TCP package. Later when it sends back any package, it uses the IP address and port of the load balancer, as the destination of the package.
 
