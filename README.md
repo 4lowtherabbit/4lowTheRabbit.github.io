@@ -1,5 +1,8 @@
 # 4lowTheRabbit.github.io
 
+## October 2019
+* [SNAT with App Service](https://4lowtherabbit.github.io/blogs/2019/10/SNAT/)
+
 ## July 2019
 * [Workshop - Crash](https://4lowTheRabbit.github.io/blogs/2019/07/Crash)
 
