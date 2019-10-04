@@ -188,4 +188,4 @@ ab -r -n 100000 -c 500 -s 120 https://labsnatxxxx.azurewebsites.net/repro/?url=h
 ```
 
 ## Reference
-[Code samples of how to manage connections behind a SNAT load balancer](https://docs.microsoft.com/en-us/azure/azure-functions/manage-connections)
+[Code samples of how to manage outbound connections behind a SNAT load balancer](https://docs.microsoft.com/en-us/azure/azure-functions/manage-connections)
