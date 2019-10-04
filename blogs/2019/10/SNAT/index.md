@@ -34,7 +34,7 @@ The above process is transparent to the worker instance and the Internet server.
 
 ![NAT Flow](NAT.png)
 
-You can download Network Monitor capture files of the above SNAT flow from: [Worker Instance side capture](worker.cap) [Internet Server side capture](remote.cap)
+The Network Monitor capture files of the above SNAT flow can be downloaded from: [Worker Instance side capture](worker.cap) [Internet Server side capture](remote.cap)
 
 ## SNAT ports exhaustion
 SNAT load balancer is a shared resource between all of App Service sites in the same stamp. Including the web applications, WebJobs, Functions, telemetry services (Application Insights), etc. All services inside a stamp need the load balancer to establish their network flows to external endpoints.
