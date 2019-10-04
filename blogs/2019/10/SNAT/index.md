@@ -2,7 +2,11 @@
 
 Usually, an App Service web application needs to connect to a few external endpoints, like SQL database, Redis cache or another Restful web service, etc. However, an App service web application cannot establish network connections to the external Internet endpoints directly.
 
-This is because an App Service web application is hosted by one or some App Service worker instances, which are bounded inside the scale unit (stamp) of the site and only have internal IP addresses of the stamp's subnet. The worker instances don’t have Internet IP addresses. The worker instances need to leverage their stamp's load balancer to do the Source Network Address Translation, aka SNAT, in order to connect to external IP addresses.
+This is because an App Service web application is hosted by one or some App Service worker instances. The worker instances are bounded inside the scale unit (stamp) of the site. They don’t have Internet IP addresses assigned and need to leverage their stamp’s load balancer to do the Source Network Address Translation, aka SNAT, in order to connect to external IP addresses.
+
+![SNAT Flow](flow.png "SNAT Flow")
+
+How does SNAT work in Azure load balancer is documented in [Outbound connections in Azure](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections). This blog post covers the things that you need to know in order to troubleshoot SNAT issues in Azure App Service.
 
 ## How does SNAT work? 
 SNAT is not a new technology. When you connect your phone to a public Internet site through your home WIFI router, your router does the network address translation too.
