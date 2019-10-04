@@ -32,6 +32,8 @@ Let's take TCP protocol for instance, SNAT works in the following steps:
 
 The above process is transparent to the worker instance and the Internet server. The load balancer does all the address translation job for them.
 
+![NAT Flow](NAT.png)
+
 ## SNAT ports exhaustion
 SNAT load balancer is a shared resource between all of App Service sites in the same stamp. Including the web applications, WebJobs, Functions, telemetry services (Application Insights), etc. All services inside a stamp need the load balancer to establish their network flows to external endpoints.
 
