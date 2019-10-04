@@ -186,3 +186,6 @@ You can try it yourself by deploying the code to your site and running the follo
 ```Bash
 ab -r -n 100000 -c 500 -s 120 https://labsnatxxxx.azurewebsites.net/repro/?url=https://labdelayxxxx.azurewebsites.net/delay?seconds=50
 ```
+
+## Reference
+[Code samples of how to manage connections behind a SNAT load balancer](https://docs.microsoft.com/en-us/azure/azure-functions/manage-connections)
