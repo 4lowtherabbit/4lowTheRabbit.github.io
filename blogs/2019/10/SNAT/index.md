@@ -130,7 +130,12 @@ If you do need it, you can still open a support ticket and the support engineer 
 "TCP Connections" and "SNAT Ports" are not quite related.
 1. The SNAT Ports are only used for external network flows, while the total TCP Connections includes local loopback connections.
 2. A SNAT port can be share by different flows, if they are different in either protocol, IP address or port. The TCP Connections metric counts on every TCP connection.
-3. The TCP Connections limit happens at worker instance’s sandbox level. The load balancer doesn’t use the TCP Connections metric for SNAT port limiting.
+3. The TCP connections limit happens at worker instance’s sandbox level. The load balancer doesn’t use the TCP Connections metric for SNAT port limiting.
+4. The TCP connections limits are described in [Sandbox Cross VM Numerical Limits - TCP Connnections](https://github.com/projectkudu/kudu/wiki/Azure-Web-App-sandbox#cross-vm-numerical-limits)
+
+   |Limit name|Description|Small (A1)|Medium (A2)|Large (A3)|
+   |----------|-----------|----------|-----------|----------|
+   |Connections|Number of connections across entire VM|1920|3968|8064|
 
 **Q**: I have multiple WebJobs hosted by a single site. They run together and share each worker instances of the site's App Service Plan. They also need to connect to the same external endpoint, which is Azure SQL database. Now they have an SNAT port exhaustion issue, since the WebJobs are complaining not able to connect to the database. How do I know which WebJob opens the most database connections and causes the issue?
 
