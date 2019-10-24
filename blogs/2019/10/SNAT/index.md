@@ -51,7 +51,7 @@ Every IP address is limited to open 65536 ports at the most. A typical App Servi
 
 ![SNAT ports per instance](equation.png)
 
-Things can get worse if applications open and close connections frequently. According to: [The **TCP SNAT port release** section of **Outbound connections in Azure**](docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release)
+Things can get worse if applications open and close connections frequently. According to: [The **TCP SNAT port release** section of **Outbound connections in Azure**](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#tcp-snat-port-release)
 
 > TCP SNAT port release
 > * If either server/client sends FINACK, SNAT port will be released after 240 seconds.
