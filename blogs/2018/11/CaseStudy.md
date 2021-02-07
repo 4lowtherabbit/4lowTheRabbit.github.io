@@ -17,8 +17,8 @@ System.Net.Http.HttpRequestException: An error occurred while sending the reques
 
 ## Troubleshooting
 ### Clarifications & possible causes
-The inner exception: `System.IO.IOException`, with an error message: *"The server returned an invalid or unrecognized response."* didn't give us much details of the context when the error happened. Possible causes could be:
-1. The web application didn't submit a valid request, or a bug in the its code.
+The inner exception: `System.IO.IOException`, with an error message: *"The server returned an invalid or unrecognized response."* didn't give us many details of the context when the error happened. Possible causes could be:
+1. The web application didn't submit a valid request, or a bug in its code.
 2. A network issue.
 3. The target backend service returned an invalid response.
 
@@ -40,7 +40,7 @@ Customer also shared me that he had followed [https://github.com/dotnet/corefx/i
 
 With the clarifications above, I suspected network could be mostly the cause, due to
 1. Altering the code couldn't fix the issue.
-2. Also the issue happened to mutiple independent backend services.
+2. Also the issue happened to multiple independent backend services.
 
 ### Code review
 Customer asked if we needed to capture a memory dump to the exception as the next troubleshooting step. I thought about it. Whether a dump would be useful, depended on where and how the exception was thrown from the code. So I decided to review the code first for where and how. I only needed to review the code of function `System.Net.Http.HttpConnection.SendAsyncCore()`, which was on the top of the above call stack and threw the exception.
@@ -89,7 +89,7 @@ I could read that:
 1. This code matched the exception structure in the error message.
 2. Dump wouldn't help in this case.
 
-    The exception was thrown as the **result** of the 0 byte issue. A dump triggered by that exception wouldn't tell me  the reason for the 0 byte response.
+    The exception was thrown as the **result** of the 0 byte issue. A dump triggered by that exception wouldn't tell me the reason for the 0 byte response.
 
 ### Conclusion
 With all the clarifications and code review above, possible causes of the 0 byte response issue should be:
@@ -100,7 +100,7 @@ With all the clarifications and code review above, possible causes of the 0 byte
 
 I discussed the findings with customer and he confirmed that there wasn't any long running request recorded in the backend servers' logs.
 
-After elimiting all impossible causes, the only remaining one was due to the Internet connectoin between the web application and the backend services.
+After eliminating all impossible causes, the only remaining one was due to the Internet connectoin between the web application and the backend services.
 
 ## Suggestions
 An http call over Internet could fail potentially. Internet connections were not stable all the time by its nature. Our code needed to be prepared for it and a retry could mitigate a temporarily Internet connectivity issue mostly. 
@@ -108,7 +108,7 @@ An http call over Internet could fail potentially. Internet connections were not
 Actually **Retry** is an important design pattern. [https://docs.microsoft.com/en-us/azure/architecture/patterns/retry](https://docs.microsoft.com/en-us/azure/architecture/patterns/retry)
 >An application that communicates with elements running in the cloud has to be sensitive to the transient faults that can occur in this environment. Faults include the momentary loss of network connectivity to components and services, the temporary unavailability of a service, or timeouts that occur when a service is busy.
 
-Similarily, applications that connect to a cloud service such as Azure SQL Database should expect periodic reconfiguration events and implement retry logic to handle these errors instead of surfacing these as application errors to users.
+Similarly, applications that connect to a cloud service such as Azure SQL Database should expect periodic reconfiguration events and implement retry logic to handle these errors instead of surfacing these as application errors to users.
  
 [https://docs.microsoft.com/en-us/azure/sql-database/sql-database-troubleshoot-common-connection-issues#steps-to-resolve-transient-connectivity-issues](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-troubleshoot-common-connection-issues#steps-to-resolve-transient-connectivity-issues)
 
