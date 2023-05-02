@@ -124,3 +124,6 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
      However, because two processes of the web application run side-by-side in a worker instance, memory, CPU, and IO resource could be tensed during the overlapped restarts. App Service could alter to non-overlapped restarts if [density](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#minimize-app-service-plan-density) is too high.
      
     Please review and follow the best practices in [The Ultimate Guide to Running Healthy Apps in the Cloud](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#set-your-health-check-path) for a resilent web application in the cloud.
+
+## Reference
+[Demystifying the magic behind App Service OS updates](https://azure.github.io/AppService/2018/01/18/Demystifying-the-magic-behind-App-Service-OS-updates.html)
