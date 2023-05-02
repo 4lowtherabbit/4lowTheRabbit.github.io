@@ -1,7 +1,7 @@
 # 4lowTheRabbit.github.io
 
 ## May 2023
-* [How does the cloud upgrade customer instances - Concept and Best Practice](https://4lowtherabbit.github.io/2023/05/Maintenance/)
+* [How does the cloud upgrade customer instances - Concept and Best Practice](https://4lowtherabbit.github.io/blogs/2023/05/Maintenance/)
 
 ## October 2019
 * [SNAT with App Service](https://4lowtherabbit.github.io/blogs/2019/10/SNAT/)
