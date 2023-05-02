@@ -92,7 +92,9 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 
 1. I received maintencne notification emails from the cloud platform. Will my site be down through the maintenance?
 
-   As illustrated above,The PaaS maintenance process is designed be transparent to cloud customers.
+   You receive email notifications either because you previously subscribed to future maintenane activities of a scale unit, or is enlisted by the platform.
+   
+   As illustrated above, the PaaS maintenance process is designed be transparent to cloud customers.
 
    Please review and follow the best practices in [The Ultimate Guide to Running Healthy Apps in the Cloud](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#set-your-health-check-path) for a resilent web application in the cloud.
 
