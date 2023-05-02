@@ -71,7 +71,7 @@ Taking Azure App Service for example: App Service has hundreds of instances in e
 
 An App Service scale unit uses a global maintenance job to upgrade all its instances, instead of one job per site. The instances are divided into a few [update domains](https://www.rupeshtiwari.com/azure-update-domain-vs-fault-domain/#why-group-servers-in-update-domains). The job shuts down instances in turn to upgrade them. It could take hours or days to walk through all the instances in each update domain. It is difficult to predict when a specific instance of a site in a scale unit will be upgraded during the long maintenance batch.
 
-### Common Questions to the PaaS Upgrade Process
+## Common Questions to the PaaS Upgrade Process
 1. What if my web application fails to start up quickly and successfully in the new instance.
 
    A cloud-ready web application should be design be resilient to restarts, that can start up quickly and successfully.
