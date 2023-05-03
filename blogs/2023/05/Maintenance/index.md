@@ -21,7 +21,7 @@ IaaS uses the following upgrade process to upgrade the host environment of a vir
 1. Can achieve zero down time through maintenance.
 1. The web application does not need to restart in any instance.
 
-   Friendly to web application who are slow or fragile to start up.
+   Is tolerant to web application who are slow or fragile to start up.
 
 1.	Maintenance time widow of the instance can be planned out of business hours.
 1. A simple and easy-to-understand process for site admins with an on-prem background.
