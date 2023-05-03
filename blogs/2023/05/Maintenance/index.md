@@ -29,7 +29,7 @@ IaaS uses the following upgrade process to upgrade the host environment of a vir
 
 ### Cons
 1. Additional cost by the standby instances.
-1. Higher manual efforts required to site admins, especially when sites have lost of worker instances.
+1. Higher manual effort is required to site admins, especially when sites have lots of worker instances.
 1. Site admins need to schedule and maintain software environment inside the virtual machine by themselves.
 
 ## Platform as a Service (PaaS)
@@ -55,11 +55,11 @@ IaaS uses the following upgrade process to upgrade the host environment of a vir
 
    In other words, it requires a cloud-friendly web application.
 
-1. Difficult to predict accurately for when the maintenance will be applied to a specific instance.
+1. It is difficult to predict accurately when the maintenance upgrades a specific instance.
 
    See [Scale Unit](#Scale-Unit)
 
-1. More upgrade activities, because the process update both the host environment and the stack inside the virtual machine.
+1. More upgrade activities, because the PaaS process updates both the host environment and the stack inside the virtual machine.
 
 1. A new process far site admins who used to the IaaS process.
 
@@ -76,7 +76,7 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 
    A cloud-ready web application should be design be resilient to restarts, that can start up quickly and successfully.
 
-   Some safeguarding features can used to handle unexpected start up failures. Taking Azure App Service for example:
+   Some safeguarding features can be used to handle unexpected start up failures. Taking Azure App Service for example:
 
    * To reserve more time for the web application to start up before a new instance starts to take requests.
   
@@ -93,7 +93,7 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 
 1. I received maintenance notification emails from the cloud platform. Will my site be down through the maintenance?
 
-   You receive email notifications either because you previously subscribed to future maintenance activities of a scale unit or is enlisted by the platform.
+   You receive email notifications either because you previously subscribed to future maintenance activities of a scale unit or are enlisted by the platform.
    
    As illustrated above, the PaaS maintenance process is designed be transparent to cloud customers.
 
@@ -101,7 +101,7 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 
 1. I see keyword "Unplanned" in the notification email. Is there any 0-day security vulnerability that you are patching in a hurry?
 
-   Having an unplanned maintenance does not imply there is a 0-day vulnerability found in the cloud.
+   Having unplanned maintenance does not imply there is a 0-day vulnerability found in the cloud.
    
    For example: The PaaS environment updates are rolled out through deployment rings. If a regression is found in an outer ring, the deployment would be paused, and an unplanned fix would need to be applied to inner ring instances who deployed the same build previously.
    
@@ -109,7 +109,7 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 
 1. Why was my site restarted at business hours.
 
-   An App Service scale unit can take hours or days to upgrade. Although the maintenance job is started out of the local business hours, the job's execution would extend to business hours and we would see restarts of a specific instance at business hours.
+   An App Service scale unit can take hours or days to upgrade. Although the maintenance job is started out of the local business hours, the job's execution would extend to business hours, and we would see restarts in a specific instance at business hours.
 
    On the other hand, seeing restarts at business hours does not mean site availability is impacted. Please review and follow the best practices in [The Ultimate Guide to Running Healthy Apps in the Cloud](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#set-your-health-check-path) for a resilient web application in the cloud.
 
