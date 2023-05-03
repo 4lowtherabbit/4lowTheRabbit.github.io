@@ -117,13 +117,16 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 
    * File storage instances follow the same overlapped restart process of PaaS for maintenance.
 
-   * Because the web applications in worker instances depend on the file storage, they need to restart too to apply the change.
+   * The web applications, who depend on that file storage, need to restart in all the worker instances to apply the change.
      
-     The web applications are restarted in the worker instances overlapped and in-place to achieve high availability through the restarts.
+     To achieve high availability during the restarts, these restarts are overlapped ones in each worker instance by default. A new worker process starts up in each worker instance first to host the web application linking to the new file storage instance. After the web application starts up in the new worker process, the original process is shut down then.
+     
+     Again, the web application needs to start up in the new worker process quickly and successfully. Even though it is an overlapped restart on that instance, high availability depends on how quickly the app starts in the new worker process too. 
       
-     However, because two processes of the web application run side-by-side in a worker instance, memory, CPU, and IO resource could be tensed during the overlapped restarts. App Service could alter to non-overlapped restarts if [density](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#minimize-app-service-plan-density) is too high.
+     Further, because there are two worker processes run side-by-side in one worker instance for each web application, memory, CPU, and IO resource could be tensed during the overlapped restarts. App Service could alter to non-overlapped restarts if [density](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#minimize-app-service-plan-density) is too high. In that case, there can be a service interruption till the web application starts up successfully in the new worker process.
      
     Please review and follow the best practices in [The Ultimate Guide to Running Healthy Apps in the Cloud](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#set-your-health-check-path) for a resilent web application in the cloud.
 
-## Reference
-[Demystifying the magic behind App Service OS updates](https://azure.github.io/AppService/2018/01/18/Demystifying-the-magic-behind-App-Service-OS-updates.html)
+## References
+* [Demystifying the magic behind App Service OS updates](https://azure.github.io/AppService/2018/01/18/Demystifying-the-magic-behind-App-Service-OS-updates.html)
+* [Inside the Azure App Service Architecture](https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/february/azure-inside-the-azure-app-service-architecture)
