@@ -4,11 +4,11 @@ The worker instances of customer sites are virtual machines running server OS. T
 
 A well-designed upgrade process can keep customer sites high available through maintenance. IaaS and PaaS take different processes.
 
-## Infrastructure as a Service (IaaS)
+## The Upgrade Process in Infrastructure as a Service (IaaS)
 
 IaaS provides virtual machines to cloud customers. Cloud customers manage the software environment of their VMs.
 
-IaaS uses the following upgrade process to upgrade the host environment of a virtual machine.
+IaaS uses the following process to upgrade the host environment of a virtual machine.
 
 |Steps|Cloud Platform|Site Admin|Website Requests Routing|Web Application|
 |-|-|-|-|-|
@@ -32,7 +32,11 @@ IaaS uses the following upgrade process to upgrade the host environment of a vir
 1. Higher manual effort is required to site admins, especially when sites have lots of worker instances.
 1. Site admins need to schedule and maintain software environment inside the virtual machine by themselves.
 
-## Platform as a Service (PaaS)
+## The Upgrade Process in Platform as a Service (PaaS)
+
+Paas provides worker instance virtual machines to cloud customers. The worker instances are ready to host customer websites, with the OS of the VM, web server, runtime of programe languages, etc., that are all maintained by PaaS.
+
+PaaS uses the following process to upgrade the host environment and the worker instances' app stacks.
 
 |Steps|Cloud Platform|Website Requests Routing|Web Application|
 |-|-|-|-|
