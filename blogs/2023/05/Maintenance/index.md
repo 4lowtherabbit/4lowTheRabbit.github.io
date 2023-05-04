@@ -78,28 +78,31 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 ## Common Questions to the PaaS Upgrade Process
 1. What if my web application fails to start up quickly and successfully in the new instance.
 
-   A cloud-ready web application should be resilient to the restarts in a cloud environment. It should start up quickly and successfully when needed.
-
-   Some safeguarding features can be used to handle unexpected start up failures. Taking Azure App Service for example:
-
-   * To reserve more time for the web application to start up before a new instance starts to take requests.
-  
-     Use [Warm Up](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#use-application-initialization).
-
-   * To automatically heal the application if it does not start up successfully.
-
-     Use [Auto Heal](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#auto-heal) to restart the application in-place of the worker instance.
-     Use [Health Check](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#set-your-health-check-path) to replace an unhealthy instance.
-
-     Most start-up errors are caused by web applications and can be healed by restarting the worker process of the web application only.
+   * A cloud-ready web application should be resilient to the restarts in a cloud environment. It should start up quickly and successfully when needed.
      
-     Auto Heal restarts are light-weight actions. It is not limited by any replacing quota limit. 
+     [The Ultimate Guide to Running Healthy Apps in the Cloud](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html):
+     >Modern-day data centers are extremely complex and have many moving parts. VMs can restart or move, systems are upgraded, and file servers are scaled up and down. All these events are to be expected in a cloud environment. However, you can make your cloud application resilient to these events by following best practices...
+     >
+     >As mentioned above, your instances are expected to and will restart...
+
+   * Some safeguarding features can be used to handle unexpected start up failures.
+     
+     Taking Azure App Service for example:
+
+     * Use [Warm Up](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#use-application-initialization) to reserve more time for the web application to start up.
+       It prevents the frontend load balancer from routing requests to a worker instance, before the web appliction is ready there.
+       
+     * Use [Auto Heal](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#auto-heal) to automatically restart the application in a worker instance if it does not start up successfully there.
+       
+     * Use [Health Check](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#set-your-health-check-path) to isolate and then replace an unhealthy instance.
+
+      Note: Most start-up errors are caused by web applications instead of a bad instance. They can be healed by restarting the worker process of the web application alone without replacing the instance. Auto Heal restarts are light-weight actions. It is not limited by any replacement quota that applies to Health Check.
 
 1. I received maintenance notification emails from the cloud platform. Will my site be down through the maintenance?
 
    You receive email notifications either because you previously subscribed to future maintenance activities of a scale unit or are enlisted by the platform.
    
-   Customer sites' availability is not expected to be impacted through the maintenance. [https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance](https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance#how-is-routine-maintenance-related-to-sla)
+   [Routine (planned) maintenance for App Service](https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance#how-is-routine-maintenance-related-to-sla):
    
    >Platform maintenance isn't expected to impact application uptime or availability. Applications continue to stay online while platform maintenance occurs. Platform maintenance may cause applications to be cold started on new virtual machines, which can lead to cold start delays. An application is still considered to be online, even while cold-starting. For best practices to minimize/avoid cold starts, ...
 
