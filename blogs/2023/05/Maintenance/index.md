@@ -136,3 +136,4 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 * [Inside the Azure App Service Architecture](https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/february/azure-inside-the-azure-app-service-architecture)
 * [Routine (planned) maintenance for App Service](https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance)
 * [Routine Planned Maintenance Notifications for Azure App Service](https://azure.github.io/AppService/2022/02/01/App-Service-Planned-Notification-Feature.html)
+* [Upgrade preference for App Service Environment planned maintenance](https://learn.microsoft.com/en-us/azure/app-service/environment/how-to-upgrade-preference)
