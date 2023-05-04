@@ -65,7 +65,7 @@ PaaS uses the following process to upgrade the host environment and the worker i
 
 1. More upgrade activities, because the PaaS process updates both the host environment and the stack inside the virtual machine.
 
-1. A new process far site admins who used to the IaaS process.
+1. For site admins who are used to the IaaS maintenance process, the PaaS process is a new concept to understand.
 
 ### Scale Unit
 
@@ -78,7 +78,7 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 ## Common Questions to the PaaS Upgrade Process
 1. What if my web application fails to start up quickly and successfully in the new instance.
 
-   A cloud-ready web application should be design be resilient to restarts, that can start up quickly and successfully.
+   A cloud-ready web application should be resilient to the restarts in a cloud environment. It should start up quickly and successfully when needed.
 
    Some safeguarding features can be used to handle unexpected start up failures. Taking Azure App Service for example:
 
@@ -99,7 +99,9 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 
    You receive email notifications either because you previously subscribed to future maintenance activities of a scale unit or are enlisted by the platform.
    
-   As illustrated above, the PaaS maintenance process is designed be transparent to cloud customers.
+   The site is expected to be avaialble through the maintenance. [https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance](https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance#how-is-routine-maintenance-related-to-sla)
+   
+   >Platform maintenance isn't expected to impact application uptime or availability. Applications continue to stay online while platform maintenance occurs. Platform maintenance may cause applications to be cold started on new virtual machines, which can lead to cold start delays. An application is still considered to be online, even while cold-starting. For best practices to minimize/avoid cold starts, ...
 
    Please review and follow the best practices in [The Ultimate Guide to Running Healthy Apps in the Cloud](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#set-your-health-check-path) for a resilient web application in the cloud.
 
@@ -111,7 +113,7 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
    
    PaaS maintains not only the host servers but also the app stack insider the worker instances. Potentially there would be more planned and unplanned maintenance activities in PaaS, while PaaS guarantees the same high availability as IaaS.
 
-1. Why was my site restarted at business hours.
+1. Why was my site restarted at business hour.
 
    An App Service scale unit can take hours or days to upgrade. Although the maintenance job is started out of the local business hours, the job's execution would extend to business hours, and we would see restarts in a specific instance at business hours.
 
