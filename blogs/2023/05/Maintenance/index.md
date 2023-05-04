@@ -99,7 +99,7 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
 
    You receive email notifications either because you previously subscribed to future maintenance activities of a scale unit or are enlisted by the platform.
    
-   The site is expected to be avaialble through the maintenance. [https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance](https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance#how-is-routine-maintenance-related-to-sla)
+   The site is expected to be available through the maintenance. [https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance](https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance#how-is-routine-maintenance-related-to-sla)
    
    >Platform maintenance isn't expected to impact application uptime or availability. Applications continue to stay online while platform maintenance occurs. Platform maintenance may cause applications to be cold started on new virtual machines, which can lead to cold start delays. An application is still considered to be online, even while cold-starting. For best practices to minimize/avoid cold starts, ...
 
