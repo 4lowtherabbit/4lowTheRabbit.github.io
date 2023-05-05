@@ -136,9 +136,16 @@ An App Service scale unit uses a global maintenance job to upgrade all its insta
      
     Please review and follow the best practices in [The Ultimate Guide to Running Healthy Apps in the Cloud](https://azure.github.io/AppService/2020/05/15/Robust-Apps-for-the-cloud.html#set-your-health-check-path) for a resilient web application in the cloud.
 
+1. How do I configure my site to the outer(late) upgrade deployment ring? Or even manually apply the upgrades?
+   
+   [Upgrade preference for App Service Environment planned maintenance](https://learn.microsoft.com/en-us/azure/app-service/environment/how-to-upgrade-preference):
+   
+   > With App Service Environment v3, you can specify your preference for when and how the planned maintenance is applied. The upgrade can be applied automatically or manually. Even with your preference set to automatic, you have some options to influence the timing.
+
+
+
 ## References
 * [Demystifying the magic behind App Service OS updates](https://azure.github.io/AppService/2018/01/18/Demystifying-the-magic-behind-App-Service-OS-updates.html)
 * [Inside the Azure App Service Architecture](https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/february/azure-inside-the-azure-app-service-architecture)
 * [Routine (planned) maintenance for App Service](https://learn.microsoft.com/en-us/azure/app-service/routine-maintenance)
 * [Routine Planned Maintenance Notifications for Azure App Service](https://azure.github.io/AppService/2022/02/01/App-Service-Planned-Notification-Feature.html)
-* [Upgrade preference for App Service Environment planned maintenance](https://learn.microsoft.com/en-us/azure/app-service/environment/how-to-upgrade-preference)
