@@ -41,7 +41,7 @@ PaaS uses the following process to upgrade the host environment and the worker i
 |Steps|Cloud Platform|Website Requests Routing|Web Application|
 |-|-|-|-|
 |1| |**Instance 0 (Active) - To be upgraded**|Running in #0|
-|2|Allocate new|**Instance 0 (Active) - To be upgraded**<br/>Instance 1 (Inactive)|Running in #0<br/>**Starting up in #1**|
+|2|Allocate new|**Instance 0 (Active) - To be upgraded**<br/>Instance 1 (Inactive)|Running in #0<br/>🟩**Starting up in #1**|
 |3|Overlapped|**Instance 0 (Active) - To be upgraded**<br/>**Instance 1 (Active)**|Running in both|
 |4|Switch|Instance 0 (Inactive) - To be upgraded<br/>**Instance 1 (Active)**|Running in both
 |5|Shut down|Instance 0 (Inactive) - To be upgraded<br/>**Instance 1 (Active)**|Shutting down from #0<br/>Running in #1
